@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="AWSMCPTestServer/AWSMCPTestServer.csproj" />
+  <Project Path="McpTestServer.Core/McpTestServer.Core.csproj" />
+  <Project Path="MCPTestServer.WebApi/MCPTestServer.WebApi.csproj" />
+</Solution>
