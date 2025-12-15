@@ -1,7 +1,9 @@
 ﻿using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
+using McpTestServer.Core.Extensions;
 using McpTestServer.Core.Models;
+using Microsoft.Extensions.AI;
 
 namespace McpTestServer.Core.Tools;
 
@@ -45,6 +47,43 @@ public static class BookTool
             else return [];
         }
 
+        var sample = await TrySamplingAsync(context.Server);
+        if (!string.IsNullOrWhiteSpace(sample))
+            return RecommendedBooks.Where(b => b.Contains(sample)).ToList();
+
+        var roots = await TryGetServerRootsAsync(context.Server);
+        if (roots != null)
+            return RecommendedBooks.Where(b=>b.Contains("Martin")).ToList();
+
         return RecommendedBooks;
+    }
+
+    private static async Task<string?> TryGetServerRootsAsync(McpServer server)
+    {
+        try
+        {
+            var roots = await server.RequestRootsAsync(new ListRootsRequestParams());
+            return roots.Roots.Select(r => r.Uri).FirstOrDefault();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return null;
+        }
+    }
+
+    private static async Task<string?> TrySamplingAsync(McpServer server)
+    {
+        try
+        {
+            var sample = await server.SampleAsync([new ChatMessage(ChatRole.Assistant, "Analyse these books and find the most popular author name. Respond only author name: " + RecommendedBooks.ToJson())]);
+
+            return sample.Text;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return null;
+        }
     }
 }

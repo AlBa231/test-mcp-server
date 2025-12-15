@@ -25,6 +25,9 @@ public class CurrencyTool(HttpClient client, ILogger<CurrencyTool> logger)
     [McpServerTool, Description("Provides the best currency with rate depended on the users' preferences.")]
     public async Task<string> GetBestCurrencyRateAsync(RequestContext<CallToolRequestParams> context)
     {
+        context.Server.AsClientLoggerProvider().CreateLogger("Fetch").Log(LogLevel.Information, "Fetching the currency rates");
+        await Task.Delay(3000);
+
         var currencyRates = await CurrencyRatesAsync();
 
         var result = await context.Server.ElicitAsync<CurrencyTypeElicitation>("To what currency do you want to compare with (UAH or USD)");
