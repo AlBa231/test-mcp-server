@@ -32,4 +32,13 @@ public static class WebApplicationExtensions
             await next();
         });
     }
+
+    public static WebApplication UseMcpAuthorization(this WebApplication app)
+    {
+        app.UseCors("mcp-inspector");
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        return app;
+    }
 }
