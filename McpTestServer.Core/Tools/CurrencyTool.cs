@@ -14,7 +14,11 @@ public class CurrencyTool(HttpClient client, ILogger<CurrencyTool> logger)
 
     private List<NbuCurrency>? _cachedCurrencies;
 
-    [McpServerTool, Description("Provides a list of currency rates for today")]
+    [McpServerTool(Title = "Provides a list of currency rates for today"), Description("""
+                                Use this tool if user asks about currency rates.
+                                
+                                The tool returns information of currency rates to UAH as base currency.
+                                """)]
     public async Task<List<NbuCurrency>> CurrencyRatesAsync()
     {
         return _cachedCurrencies ??= await client.GetFromJsonAsync<List<NbuCurrency>>(ExchangeApiUrl)
@@ -22,7 +26,12 @@ public class CurrencyTool(HttpClient client, ILogger<CurrencyTool> logger)
     }
 
 
-    [McpServerTool, Description("Provides the best currency with rate depended on the users' preferences.")]
+    [McpServerTool(Title = "Provides the best currency with rate depended on the users' preferences.")]
+    [Description("""
+                 Use this tool when user asks to find the best currency rate.
+                 
+                 The tool will ask the user for additional question using Elicitation to provide the user the currency to convert the rate to (USD or EUR).
+                 """)]
     public async Task<string> GetBestCurrencyRateAsync(RequestContext<CallToolRequestParams> context)
     {
         context.Server.AsClientLoggerProvider().CreateLogger("Fetch").Log(LogLevel.Information, "Fetching the currency rates");

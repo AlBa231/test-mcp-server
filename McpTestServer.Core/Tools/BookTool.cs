@@ -36,7 +36,19 @@ public static class BookTool
 
     private static bool _initialized;
 
-    [McpServerTool, Description("List the recommended test book titles.")]
+    [McpServerTool(Title = "List the recommended test book titles.")]
+    [Description("""
+                 This tool will return a list of recommended book titles for software developers.
+                 
+                 Use it when the user asks for book recommendations related to programming, software development, or C#.
+                 The tool will ask for user consent before loading the book list for the first time.
+                 
+                 The tool may use sampling to filter the book list based on popular authors if possible.
+                 
+                 If sampling is not possible, the tool may check server roots to filter books by author "Martin".
+                 
+                 If the list is empty - just display a message that no books are available. Do not return null or throw an error and not call the tool again.
+                 """)]
     public static async Task<List<string>> ListRecommendedBookNames(RequestContext<CallToolRequestParams> context)
     {
         if (!_initialized)

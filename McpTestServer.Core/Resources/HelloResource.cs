@@ -6,7 +6,7 @@ namespace McpTestServer.Core.Resources;
 [McpServerResourceType]
 public static class HelloResource
 {
-    [McpServerResource(MimeType = "text/markdown", UriTemplate = "hello://echo/best", Title = "Get the best greetings message.")]
+    [McpServerResource(MimeType = "text/markdown", UriTemplate = "hello://greetings/best", Title = "Get the best greetings message.")]
     [Description("""
                  This resource display the list of best greetings messages in Markdown format.
                  
