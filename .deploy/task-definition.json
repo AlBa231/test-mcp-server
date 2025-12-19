@@ -1,0 +1,34 @@
+{
+  "family": "mcp-test-web-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+
+  "executionRoleArn": "arn:aws:iam::102724112763:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::102724112763:role/MCP-Server-WeatherNodeJsServerWeatherNodeJsTaskExec-LUxnkkgVk1Zo",
+
+  "containerDefinitions": [
+    {
+      "name": "mcp-test-web-api",
+      "image": "IMAGE_URI",
+      "essential": true,
+
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/mcp-test-web-api",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}

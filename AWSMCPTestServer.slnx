@@ -5,6 +5,9 @@
     <File Path="MCPTestServer.WebApi/Properties/launchSettings.json" />
     <File Path="README.md" />
   </Folder>
+  <Folder Name="/Solution Items/.deploy/">
+    <File Path=".deploy/task-definition.json" />
+  </Folder>
   <Project Path="AWSMCPTestServer/AWSMCPTestServer.csproj" />
   <Project Path="McpTestServer.Core/McpTestServer.Core.csproj" />
   <Project Path="MCPTestServer.WebApi/MCPTestServer.WebApi.csproj" />

@@ -24,7 +24,28 @@ jobs:
     - uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build and push
+      id: build
       run: |
-        docker build -t mcp-test-web-api .
-        docker tag mcp-test-web-api:latest 102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:latest
-        docker push 102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:latest
+        IMAGE_TAG=${GITHUB_SHA::7}
+        IMAGE_URI=102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:$IMAGE_TAG
+
+        docker build -t $IMAGE_URI .
+        docker push $IMAGE_URI
+
+        echo "image=$IMAGE_URI" >> $GITHUB_OUTPUT
+
+    - name: Render task definition
+      id: render
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: .deploy/task-definition.json
+        container-name: mcp-test-web-api
+        image: ${{ steps.build.outputs.image }}
+
+    - name: Deploy to ECS
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        cluster: MCP-Server-MCPCluster399F09A9-BGgotqfjOyxi
+        service: mcp-test-web-api-service-2qklq661
+        task-definition: ${{ steps.render.outputs.task-definition }}
+        wait-for-service-stability: true
