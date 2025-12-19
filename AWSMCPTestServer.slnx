@@ -1,5 +1,7 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path="Dockerfile" />
+    <File Path="MCPTestServer.WebApi/Properties/launchSettings.json" />
     <File Path="README.md" />
   </Folder>
   <Project Path="AWSMCPTestServer/AWSMCPTestServer.csproj" />

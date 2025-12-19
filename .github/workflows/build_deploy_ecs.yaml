@@ -1,0 +1,26 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::102724112763:role/github-ci
+        aws-region: us-east-1
+
+    - uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build and push
+      run: |
+        cd MCPTestServer.WebApi
+        docker build -t mcp-test-web-api .
+        docker tag mcp-test-web-api:latest 102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:latest
+        docker push 102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:latest
