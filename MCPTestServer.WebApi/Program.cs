@@ -16,6 +16,7 @@ if (builder.Configuration.UseAuthorization())
 var app = builder.Build();
 app.UseRequestLogging();
 
+app.Logger.Log(LogLevel.Information, "Mapping health to /health");
 app.MapHealthChecks("/health");
 
 if (builder.Configuration.UseAuthorization())
