@@ -25,7 +25,6 @@ jobs:
 
     - name: Build and push
       run: |
-        cd MCPTestServer.WebApi
         docker build -t mcp-test-web-api .
         docker tag mcp-test-web-api:latest 102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:latest
         docker push 102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:latest
