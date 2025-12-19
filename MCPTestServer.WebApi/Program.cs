@@ -14,6 +14,7 @@ if (builder.Configuration.UseAuthorization())
     builder.Services.AddMcpAuthorization(builder.Configuration);
 
 var app = builder.Build();
+app.UsePathBase("/test");
 app.UseRequestLogging();
 
 app.Logger.Log(LogLevel.Information, "Mapping health to /health");
