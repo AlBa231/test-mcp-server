@@ -15,8 +15,8 @@ var app = builder.Build();
 app.UseRequestLogging();
 
 if (builder.Configuration.UseAuthorization())
-    app.UseMcpAuthorization().MapMcp().RequireAuthorization();
+    app.UseMcpAuthorization().MapMcp("/test").RequireAuthorization();
 else
-    app.MapMcp();
+    app.MapMcp("/test");
 
 await app.RunAsync("http://localhost:3001");
