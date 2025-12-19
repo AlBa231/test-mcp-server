@@ -18,15 +18,13 @@
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",
-      "dockerfilePath": "../Dockerfile",
       "launchUrl": "http://localhost:8080",
       "environmentVariables": {
-        "ASPNETCORE_HTTP_PORTS": "8080",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_HTTP_PORTS": "8080"
       },
       "publishAllPorts": false,
-      "httpPort": 8080,
-      "useSSL": false
+      "useSSL": false,
+      "httpPort": 8080
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"
