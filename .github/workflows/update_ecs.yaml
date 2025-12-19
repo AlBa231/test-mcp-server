@@ -27,4 +27,4 @@ jobs:
       run: |
         aws ecr put-lifecycle-policy \
           --repository-name mcp-test-web-api \
-          --lifecycle-policy-text file://.deploy/lifecycle.json
+          --lifecycle-policy-text file://.deploy/ecr-lifecycle.json
