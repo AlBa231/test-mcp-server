@@ -1,11 +1,16 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path=".github/workflows/build_deploy_ecs.yaml" />
     <File Path="MCPTestServer.WebApi/Properties/launchSettings.json" />
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Solution Items/.deploy/">
+    <File Path=".deploy/ecr-lifecycle.json" />
+    <File Path=".deploy/github_ci_policy.json" />
     <File Path=".deploy/task-definition.json" />
+  </Folder>
+  <Folder Name="/Solution Items/workflows/">
+    <File Path=".github/workflows/build_deploy_ecs.yaml" />
+    <File Path=".github/workflows/update_ecs.yaml" />
   </Folder>
   <Project Path="AWSMCPTestServer/AWSMCPTestServer.csproj" />
   <Project Path="McpTestServer.Core/McpTestServer.Core.csproj" />
