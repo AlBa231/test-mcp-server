@@ -8,15 +8,19 @@ builder.Services
     .WithHttpTransport()
     .AddMcpTestServerFeatures();
 
+builder.Services.AddHealthChecks();
+
 if (builder.Configuration.UseAuthorization())
     builder.Services.AddMcpAuthorization(builder.Configuration);
 
 var app = builder.Build();
 app.UseRequestLogging();
 
+app.MapHealthChecks("/health");
+
 if (builder.Configuration.UseAuthorization())
     app.UseMcpAuthorization().MapMcp("/test").RequireAuthorization();
 else
     app.MapMcp("/test");
 
-await app.RunAsync("http://localhost:3001");
+await app.RunAsync();
