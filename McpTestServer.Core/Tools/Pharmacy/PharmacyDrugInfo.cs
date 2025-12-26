@@ -1,4 +1,4 @@
-namespace McpTestServer.Core.Tools;
+namespace McpTestServer.Core.Tools.Pharmacy;
 
 public class PharmacyDrugInfo
 {

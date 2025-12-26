@@ -1,4 +1,4 @@
-namespace McpTestServer.Core.Tools;
+namespace McpTestServer.Core.Tools.Pharmacy;
 
 internal static class PharmacyDrugInfoRandomGenerator
 {
@@ -9,7 +9,7 @@ internal static class PharmacyDrugInfoRandomGenerator
         return Pharmacies.SelectMany(pharmacy => drugNames.Select(name => CreateDrugInfo(pharmacy, name)));
     }
 
-    private static PharmacyDrugInfo CreateDrugInfo(string pharmacy, string name)
+    public static PharmacyDrugInfo CreateDrugInfo(string pharmacy, string name)
     {
         return new PharmacyDrugInfo
         {
