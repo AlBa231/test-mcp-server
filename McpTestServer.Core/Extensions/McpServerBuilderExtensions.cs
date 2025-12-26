@@ -19,6 +19,7 @@ public static class McpServerBuilderExtensions
             .WithTools<CurrencyTool>()
             .WithResourcesFromAssembly(typeof(WeatherResource).Assembly)
             .WithResources<WeatherResource>()
+            .WithResources<UkraineHolidaysResource>()
             .WithPromptsFromAssembly(typeof(VacationPrompt).Assembly);
         return builder;
     }
