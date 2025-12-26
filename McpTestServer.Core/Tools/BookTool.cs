@@ -2,7 +2,6 @@
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 using McpTestServer.Core.Extensions;
-using McpTestServer.Core.Models;
 using Microsoft.Extensions.AI;
 
 namespace McpTestServer.Core.Tools;
@@ -34,54 +33,19 @@ public static class BookTool
         "20. Nishant Sivakumar — Practical Artificial Intelligence for .NET Developers"
     ];
 
-    private static bool _initialized;
-
     [McpServerTool(Title = "List the recommended test book titles.")]
     [Description("""
                  This tool will return a list of recommended book titles for software developers.
                  
                  Use it when the user asks for book recommendations related to programming, software development, or C#.
-                 The tool will ask for user consent before loading the book list for the first time.
                  
                  The tool may use sampling to filter the book list based on popular authors if possible.
-                 
-                 If sampling is not possible, the tool may check server roots to filter books by author "Martin".
-                 
-                 If the list is empty - just display a message that no books are available. Do not return null or throw an error and not call the tool again.
                  """)]
     public static async Task<List<string>> ListRecommendedBookNames(RequestContext<CallToolRequestParams> context)
     {
-        if (!_initialized)
-        {
-            var response = await context.Server.ElicitAsync<YesNoElicitation>("Do you agree to load a list of recommended books?");
-            if (response.IsAccepted || response.Action == "accepted")
-                _initialized = true;
-            else return [];
-        }
-
-        var sample = await TrySamplingAsync(context.Server);
-        if (!string.IsNullOrWhiteSpace(sample))
-            return RecommendedBooks.Where(b => b.Contains(sample)).ToList();
-
-        var roots = await TryGetServerRootsAsync(context.Server);
-        if (roots != null)
-            return RecommendedBooks.Where(b=>b.Contains("Martin")).ToList();
+        await TrySamplingAsync(context.Server);
 
         return RecommendedBooks;
-    }
-
-    private static async Task<string?> TryGetServerRootsAsync(McpServer server)
-    {
-        try
-        {
-            var roots = await server.RequestRootsAsync(new ListRootsRequestParams());
-            return roots.Roots.Select(r => r.Uri).FirstOrDefault();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return null;
-        }
     }
 
     private static async Task<string?> TrySamplingAsync(McpServer server)
