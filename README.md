@@ -30,21 +30,23 @@ npx @modelcontextprotocol/inspector https://d1w0taajz0mgpa.cloudfront.net/test/
 
 ### Prerequisites
 - AWS CLI installed and configured
-- Deployed infrastructure from [AWS Guidance](https://github.com/aws-solutions-library-samples/guidance-for-deploying-model-context-protocol-servers-on-aws)
 
 ### Steps to Deploy
-1. Create AWS Role with necessary permissions for Lambda and API Gateway. (see .deploy/role-policy.json)
-1. Create ECR repository to store Docker image.
-```bash
-	aws ecr create-repository \
-	  --repository-name mcp-test-web-api \
-	  --region us-east-1
-```
+1. Review and update ./infra/terraform.tfvars with your App name, AWS Region and GitHub repo name.
+1. Run the `deploy.cmd` script to set up the necessary AWS resources.
+	```bash
+	   ./deploy.cmd
+	```
 
-1. Setup Application Load Balancer (ALB) with HTTPS listener and target group.
-	* Add Target Group for mcp-test-web-api ECS service. Map to port 8080.
-	* Edit HTTPS listener to forward requests to the target group. (use path pattern /test/\*)
-1. Update CI pipeline to build and push Docker image to ECR, and deploy ECS service. 
-	* Replace Account ID in .github/\*.yml and .deploy/\*.json
-	* Replace Resource IDs in .deploy/\*.json and .github/\*.yml
-	* Replace Role Arns in .deploy/\*.json and .github/\*.yml
+	This script will:
+	* Do login if AWS CLI is not logged in.
+	* Create S3 bucket for Terraform state
+	* Initialize and apply Terraform configuration to create:
+		1. ECR repository for Docker images
+		1. ECS Cluster
+		1. IAM Roles and Policies
+		1. Application Load Balancer (ALB)
+		1. CloudFront Distribution
+		1. Generates `infra/ci/task-definition.json` file for ECS service auto-deployment via GitHub Actions.
+1. Add new generated `infra/ci/task-definition.json` file to GitHub repository.
+1. Commit and push changes to GitHub repository to trigger GitHub Actions workflow for deploying the Docker container to ECS.
