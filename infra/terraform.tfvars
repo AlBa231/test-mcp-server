@@ -1,2 +1,2 @@
-region     = "us-east-1"
+region   = "us-east-1"
 app_name = "mcp-poc-web-api"

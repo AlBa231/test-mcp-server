@@ -20,7 +20,7 @@ module "vpc" {
 }
 
 module "ecr" {
-  source    = "./modules/ecr"
+  source   = "./modules/ecr"
   app_name = var.app_name
 }
 
@@ -48,5 +48,5 @@ module "cloudfront" {
 module "ci" {
   source         = "./modules/ci"
   ecs_roles_arns = module.ecs.ecs_roles_arns
-  app_name      = var.app_name
+  app_name       = var.app_name
 }

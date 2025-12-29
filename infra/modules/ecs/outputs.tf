@@ -11,5 +11,7 @@ output "ecs_security_group" {
 }
 
 output "ecs_roles_arns" {
-  value = [aws_ecs_task_definition.execution_role_arn, aws_ecs_task_definition.task_role_arn]
+  value = [
+    aws_ecs_task_definition.this.execution_role_arn,
+  aws_ecs_task_definition.this.task_role_arn]
 }
