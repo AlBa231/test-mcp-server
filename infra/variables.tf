@@ -9,7 +9,7 @@ variable "azs" {
   default     = ["us-east-1a", "us-east-1b"]
 }
 
-variable "image_name" {
+variable "app_name" {
   type        = string
   description = "The name of the ECS image in the ECR repository"
 }

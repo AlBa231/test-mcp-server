@@ -21,7 +21,7 @@ module "vpc" {
 
 module "ecr" {
   source    = "./modules/ecr"
-  repo_name = var.image_name
+  app_name = var.app_name
 }
 
 module "alb" {
@@ -37,7 +37,7 @@ module "ecs" {
   alb_sg_id        = module.alb.alb_sg_id
   target_group_arn = module.alb.target_group_arn
   region           = var.region
-  log_group_name   = var.image_name
+  app_name         = var.app_name
 }
 
 module "cloudfront" {
@@ -48,5 +48,5 @@ module "cloudfront" {
 module "ci" {
   source         = "./modules/ci"
   ecs_roles_arns = module.ecs.ecs_roles_arns
-  repo_name      = var.image_name
+  app_name      = var.app_name
 }

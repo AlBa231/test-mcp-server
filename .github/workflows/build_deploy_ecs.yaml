@@ -13,6 +13,13 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  AWS_ACCOUNT_ID: 102724112763
+  REGION: us-east-1
+  APP_NAME: mcp-poc-web-api
+  ECS_CLUSTER_NAME: mcp-cluster
+
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,8 +29,8 @@ jobs:
 
     - uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::102724112763:role/github-ci
-        aws-region: us-east-1
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github-ci
+        aws-region: ${{ env.REGION }}
 
     - uses: aws-actions/amazon-ecr-login@v2
 
@@ -31,7 +38,7 @@ jobs:
       id: build
       run: |
         IMAGE_TAG=${GITHUB_SHA::7}
-        IMAGE_URI=102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-poc-web-api:$IMAGE_TAG
+        IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$APP_NAME:$IMAGE_TAG
 
         docker build -f MCPTestServer.WebApi/Dockerfile -t $IMAGE_URI .
         docker push $IMAGE_URI
@@ -42,14 +49,14 @@ jobs:
       id: render
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
-        task-definition: .deploy/task-definition.json
-        container-name: mcp-test-web-api
+        task-definition: .infra/ci/task-definition.json
+        container-name: ${{ env.APP_NAME }}
         image: ${{ steps.build.outputs.image }}
 
     - name: Deploy to ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        cluster: mcp-cluster
-        service: mcp-service
+        cluster: ${{ env.ECS_CLUSTER_NAME }}
+        service: ${{ env.APP_NAME }}
         task-definition: ${{ steps.render.outputs.task-definition }}
         wait-for-service-stability: true

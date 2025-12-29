@@ -1,4 +1,4 @@
-variable "repo_name" {
+variable "app_name" {
   type        = string
   description = "The name of ECR repository"
 }

@@ -22,7 +22,7 @@ resource "aws_security_group" "ecs" {
 }
 
 resource "aws_ecs_task_definition" "this" {
-  family                   = "mcp-api"
+  family                   = var.app_name
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
   cpu                      = 512
@@ -32,7 +32,7 @@ resource "aws_ecs_task_definition" "this" {
 
   container_definitions = jsonencode([
     {
-      name         = "api"
+      name         = var.app_name
       image        = var.task_image_uri
       portMappings = [{ containerPort = 8080 }]
       command      = var.task_image_command
@@ -53,7 +53,7 @@ resource "aws_ecs_task_definition" "this" {
 }
 
 resource "aws_ecs_service" "this" {
-  name            = "mcp-service"
+  name            = var.app_name
   cluster         = aws_ecs_cluster.this.id
   task_definition = aws_ecs_task_definition.this.arn
   desired_count   = 1

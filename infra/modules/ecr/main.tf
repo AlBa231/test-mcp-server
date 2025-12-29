@@ -1,12 +1,12 @@
 resource "aws_ecr_repository" "this" {
-  name = var.repo_name
+  name = var.app_name
 
   image_scanning_configuration {
     scan_on_push = true
   }
 
   tags = {
-    Name = var.repo_name
+    Name = var.app_name
   }
 }
 
