@@ -8,6 +8,6 @@ resource "local_file" "ecs_task_definition_json" {
     memory                  = aws_ecs_task_definition.this.memory
     executionRoleArn        = aws_ecs_task_definition.this.execution_role_arn
     taskRoleArn             = aws_ecs_task_definition.this.task_role_arn
-    containerDefinitions    = aws_ecs_task_definition.this.container_definitions
+    containerDefinitions    = local.container_definitions
   })
 }

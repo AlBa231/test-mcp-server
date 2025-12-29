@@ -30,21 +30,7 @@ resource "aws_ecs_task_definition" "this" {
   execution_role_arn       = aws_iam_role.ecs_execution.arn
   task_role_arn            = aws_iam_role.task.arn
 
-  container_definitions = jsonencode([
-    {
-      name         = var.app_name
-      image        = var.task_image_uri
-      portMappings = [{ containerPort = 8080 }]
-      logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          "awslogs-group"         = "/ecs/${var.app_name}"
-          "awslogs-region"        = var.region
-          "awslogs-stream-prefix" = "ecs"
-        }
-      }
-    }
-  ])
+  container_definitions = jsonencode(local.container_definitions)
 
 }
 
