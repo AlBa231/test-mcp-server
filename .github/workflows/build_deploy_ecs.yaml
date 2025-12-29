@@ -3,10 +3,10 @@ name: Build and Push to ECR
 on:
   push:
     branches: [ master ]
-    paths:
-      - github/workflows/build_deploy_ecs.yaml
-      - MCPTestServer.WebApi/**
-      - McpTestServer.Core/**
+    # paths:
+    #   - github/workflows/build_deploy_ecs.yaml
+    #   - MCPTestServer.WebApi/**
+    #   - McpTestServer.Core/**
   workflow_dispatch:
 
 permissions:
