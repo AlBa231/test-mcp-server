@@ -31,13 +31,13 @@ jobs:
       id: build
       run: |
         IMAGE_TAG=${GITHUB_SHA::7}
-        IMAGE_URI=102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-test-web-api:$IMAGE_TAG
+        IMAGE_URI=102724112763.dkr.ecr.us-east-1.amazonaws.com/mcp-poc-web-api:$IMAGE_TAG
 
         docker build -f MCPTestServer.WebApi/Dockerfile -t $IMAGE_URI .
         docker push $IMAGE_URI
 
         echo "image=$IMAGE_URI" >> $GITHUB_OUTPUT
-
+        
     - name: Render task definition
       id: render
       uses: aws-actions/amazon-ecs-render-task-definition@v1
@@ -49,7 +49,7 @@ jobs:
     - name: Deploy to ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        cluster: MCP-Server-MCPCluster399F09A9-BGgotqfjOyxi
-        service: mcp-test-web-api-service-2qklq661
+        cluster: mcp-cluster
+        service: mcp-service
         task-definition: ${{ steps.render.outputs.task-definition }}
         wait-for-service-stability: true
