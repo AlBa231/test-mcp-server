@@ -14,7 +14,7 @@ if (builder.Configuration.UseAuthorization())
     builder.Services.AddMcpAuthorization(builder.Configuration);
 
 var app = builder.Build();
-app.UsePathBase("/test");
+app.UsePathBase(builder.Configuration.GetAppBasePath());
 app.UseRequestLogging();
 app.UseMcpExceptionHandling();
 
@@ -22,8 +22,8 @@ app.Logger.Log(LogLevel.Information, "Mapping health to /health");
 app.MapHealthChecks("/health");
 
 if (builder.Configuration.UseAuthorization())
-    app.UseMcpAuthorization().MapMcp("/test").RequireAuthorization();
+    app.UseMcpAuthorization().MapMcp(builder.Configuration.GetAppBasePath()).RequireAuthorization();
 else
-    app.MapMcp("/test");
+    app.MapMcp(builder.Configuration.GetAppBasePath());
 
 await app.RunAsync();

@@ -6,4 +6,9 @@ public static class ConfigurationManagerExtensions
     {
         return bool.TryParse(configurationManager["EnableAuthorization"], out bool enableAuthorization) && enableAuthorization;
     }
+
+    public static string GetAppBasePath(this ConfigurationManager configurationManager)
+    {
+        return configurationManager["BasePath"] ?? "/";
+    }
 }
