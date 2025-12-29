@@ -21,7 +21,7 @@ resource "aws_iam_role_policy_attachment" "ecs_execution_policy" {
 #### TASK ROLE ####
 
 resource "aws_iam_role" "task" {
-  name = "mcp-server-task-role"
+  name = "${var.app_name}-task-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -30,14 +30,5 @@ resource "aws_iam_role" "task" {
       Principal = { Service = "ecs-tasks.amazonaws.com" }
       Action    = "sts:AssumeRole"
     }]
-  })
-}
-
-resource "aws_iam_role_policy" "task_policy" {
-  role = aws_iam_role.task.id
-
-  policy = jsonencode({
-    Version   = "2012-10-17"
-    Statement = []
   })
 }

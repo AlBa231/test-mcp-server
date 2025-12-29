@@ -35,7 +35,6 @@ resource "aws_ecs_task_definition" "this" {
       name         = var.app_name
       image        = var.task_image_uri
       portMappings = [{ containerPort = 8080 }]
-      command      = var.task_image_command
       logConfiguration = {
         logDriver = "awslogs"
         options = {
@@ -47,9 +46,6 @@ resource "aws_ecs_task_definition" "this" {
     }
   ])
 
-  lifecycle {
-    ignore_changes = [container_definitions]
-  }
 }
 
 resource "aws_ecs_service" "this" {
@@ -66,7 +62,7 @@ resource "aws_ecs_service" "this" {
 
   load_balancer {
     target_group_arn = var.target_group_arn
-    container_name   = "api"
+    container_name   = var.app_name
     container_port   = 8080
   }
 }

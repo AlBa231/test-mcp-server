@@ -13,3 +13,8 @@ variable "app_name" {
   type        = string
   description = "The name of the ECS image in the ECR repository"
 }
+
+variable "github_repo" {
+  type        = string
+  description = "The GitHub repository name"
+}

@@ -16,8 +16,8 @@ resource "aws_cloudfront_distribution" "this" {
   default_cache_behavior {
     target_origin_id       = "alb"
     viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["GET", "POST", "OPTIONS"]
-    cached_methods         = ["GET", "OPTIONS"]
+    allowed_methods        = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
+    cached_methods         = ["HEAD", "GET", "OPTIONS"]
 
     forwarded_values {
       query_string = true

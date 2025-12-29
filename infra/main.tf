@@ -49,4 +49,5 @@ module "ci" {
   source         = "./modules/ci"
   ecs_roles_arns = module.ecs.ecs_roles_arns
   app_name       = var.app_name
+  github_repo    = var.github_repo
 }
