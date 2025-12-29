@@ -21,6 +21,11 @@ resource "aws_security_group" "ecs" {
   }
 }
 
+resource "aws_cloudwatch_log_group" "ecs_log_group" {
+  name              = "/ecs/${var.app_name}"
+  retention_in_days  = 14                   
+}
+
 resource "aws_ecs_task_definition" "this" {
   family                   = var.app_name
   requires_compatibilities = ["FARGATE"]
