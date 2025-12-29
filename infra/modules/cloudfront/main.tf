@@ -22,6 +22,7 @@ resource "aws_cloudfront_distribution" "this" {
     forwarded_values {
       query_string = true
       cookies { forward = "all" }
+      headers = ["Accept"]
     }
   }
 
