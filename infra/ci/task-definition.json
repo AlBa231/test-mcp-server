@@ -1,4 +1,1 @@
-{
-	// Run deploy.cmd to generate the file
-	// Add generated file to the repository
-}
+{"containerDefinitions":"[{\"environment\":[],\"essential\":true,\"image\":\"nginx:alpine\",\"logConfiguration\":{\"logDriver\":\"awslogs\",\"options\":{\"awslogs-group\":\"/ecs/mcp-poc-web-api\",\"awslogs-region\":\"us-east-1\",\"awslogs-stream-prefix\":\"ecs\"}},\"mountPoints\":[],\"name\":\"mcp-poc-web-api\",\"portMappings\":[{\"containerPort\":8080,\"hostPort\":8080,\"protocol\":\"tcp\"}],\"systemControls\":[],\"volumesFrom\":[]}]","cpu":"512","executionRoleArn":"arn:aws:iam::102724112763:role/ecsTaskExecutionRole","family":"mcp-poc-web-api","memory":"1024","networkMode":"awsvpc","requiresCompatibilities":["FARGATE"],"taskRoleArn":"arn:aws:iam::102724112763:role/mcp-poc-web-api-task-role"}
