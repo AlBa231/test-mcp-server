@@ -7,7 +7,7 @@ on:
     - ./github/workflows/build_deploy_ecs.yaml
     - ./MCPTestServer.WebApi/**
     - ./McpTestServer.Core/**
-
+  workflow_dispatch:
 
 permissions:
   id-token: write
