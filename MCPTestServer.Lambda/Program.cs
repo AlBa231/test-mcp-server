@@ -1,5 +1,8 @@
-﻿using McpTestServer.Core.Extensions;
-using MCPTestServer.WebApi.Extensions;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using McpTestServer.Core.Extensions;
+using MCPTestServer.Lambda.Extensions;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,20 +14,13 @@ builder.Services
 
 builder.Services.AddHealthChecks();
 
-if (builder.Configuration.UseAuthorization())
-    builder.Services.AddMcpAuthorization(builder.Configuration);
-
 var app = builder.Build();
 app.UsePathBase(builder.Configuration.GetAppBasePath());
-app.UseRequestLogging();
 app.UseMcpExceptionHandling();
 
 app.Logger.Log(LogLevel.Information, "Mapping health to /health");
 app.MapHealthChecks("/health");
 
-if (builder.Configuration.UseAuthorization())
-    app.UseMcpAuthorization().MapMcp(builder.Configuration.GetAppBasePath()).RequireAuthorization();
-else
-    app.MapMcp(builder.Configuration.GetAppBasePath());
+app.MapMcp(builder.Configuration.GetAppBasePath());
 
 await app.RunAsync();

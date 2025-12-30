@@ -11,7 +11,6 @@ public static class McpServerBuilderExtensions
     public static IMcpServerBuilder AddMcpTestServerFeatures(this IMcpServerBuilder builder)
     {
         builder.Services
-            .AddSingleton<HttpClient>()
             .AddHostedService<EchoResourceUpdateNotifier>();
 
         builder

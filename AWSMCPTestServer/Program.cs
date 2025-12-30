@@ -7,7 +7,9 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.Logging
     .AddConsole(consoleLogOptions => consoleLogOptions.LogToStandardErrorThreshold = LogLevel.Trace)
     .AddFile("Logs/mcp-server-{Date}.txt");
-builder.Services.AddMcpServer()
+builder.Services
+    .AddSingleton<HttpClient>()
+    .AddMcpServer()
     .WithStdioServerTransport()
     .AddMcpTestServerFeatures();
 
