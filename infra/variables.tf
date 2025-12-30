@@ -11,7 +11,7 @@ variable "azs" {
 
 variable "app_name" {
   type        = string
-  description = "The name of the ECS image in the ECR repository"
+  description = "The name of the App to use in the ECS image in the ECR repository and as a part of other resource names"
 }
 
 variable "github_repo" {

@@ -51,3 +51,10 @@ module "ci" {
   app_name       = var.app_name
   github_repo    = var.github_repo
 }
+
+module "lambda" {
+  source                = "./modules/lambda"
+  vpc_id                = module.vpc.vpc_id
+  app_name              = var.app_name
+  alb_http_listener_arn = module.alb.alb_http_listener_arn
+}
