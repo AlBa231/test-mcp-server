@@ -62,7 +62,10 @@ resource "aws_iam_policy" "github_ci" {
           "ecr:CompleteLayerUpload",
           "ecr:PutImage"
         ]
-        Resource = "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}"
+        Resource = [
+          "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}",
+          "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}*"
+        ]
       },
       {
         Effect = "Allow"
@@ -97,7 +100,10 @@ resource "aws_iam_policy" "github_ci" {
           "ecr:PutLifecyclePolicy",
           "ecr:GetLifecyclePolicy"
         ]
-        Resource = "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}"
+        Resource = [
+          "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}",
+          "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}*"
+        ]
       }
     ]
   })

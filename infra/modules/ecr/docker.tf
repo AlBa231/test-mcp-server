@@ -16,7 +16,7 @@ provider "docker" {
     address  = data.aws_ecr_authorization_token.this.proxy_endpoint
     username = data.aws_ecr_authorization_token.this.user_name
     password = data.aws_ecr_authorization_token.this.password
-  }  
+  }
 }
 
 resource "aws_ecr_repository" "minimal_lambda_alb_go_echo" {
@@ -25,7 +25,7 @@ resource "aws_ecr_repository" "minimal_lambda_alb_go_echo" {
 
 resource "docker_image" "lambda_image" {
   name = "${aws_ecr_repository.minimal_lambda_alb_go_echo.repository_url}:latest"
-  
+
   build {
     context    = "${path.root}/docker/minimal-lambda-alb-http-server"
     dockerfile = "Dockerfile"

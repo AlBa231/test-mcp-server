@@ -34,8 +34,8 @@ resource "aws_lb_target_group" "lambda_tg" {
   target_type = "lambda"
 
   health_check {
-    enabled = true
-    matcher = "200"
+    enabled  = true
+    matcher  = "200"
     interval = 40
     timeout  = 30
   }
