@@ -30,6 +30,8 @@ npx @modelcontextprotocol/inspector https://d1w0taajz0mgpa.cloudfront.net/test/
 
 ### Prerequisites
 - AWS CLI installed and configured
+- Docker installed
+- Terraform installed
 
 ### Steps to Deploy
 1. Review and update ./infra/terraform.tfvars with your App name, AWS Region and GitHub repo name.
