@@ -10,7 +10,7 @@ builder.Services
     .AddAWSLambdaHosting(LambdaEventSource.ApplicationLoadBalancer)
     .AddHttpClient()
     .AddMcpServer()
-    .WithHttpTransport()
+    .WithHttpTransport(opts => opts.Stateless = true)
     .AddMcpTestServerFeatures();
 
 builder.Services.AddHealthChecks();
