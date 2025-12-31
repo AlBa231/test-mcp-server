@@ -26,7 +26,7 @@ resource "aws_iam_role_policy" "lambda_ecr_access" {
         "ecr:BatchGetImage",
         "ecr:BatchCheckLayerAvailability"
       ]
-      Resource = "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}-lambda"
+      Resource = "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}-*"
     }]
   })
 }
