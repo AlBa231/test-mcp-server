@@ -56,3 +56,31 @@ jobs:
         service: ${{ env.APP_NAME }}
         task-definition: ${{ steps.render.outputs.task-definition }}
         wait-for-service-stability: true
+        
+  lambda:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github-ci
+        aws-region: ${{ env.REGION }}
+
+    - uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build and push
+      id: lambda_build
+      run: |
+        IMAGE_TAG=${GITHUB_SHA::7}
+        IMAGE_URI=$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$APP_NAME-lambda:$IMAGE_TAG
+
+        docker build -f MCPTestServer.Lambda/Dockerfile -t $IMAGE_URI .
+        docker push $IMAGE_URI
+
+        echo "image=$IMAGE_URI" >> $GITHUB_OUTPUT
+        
+    - name: Update lambda function
+      run: |
+          aws lambda update-function-code --function-name $APP_NAME-lambda --image-uri ${{ steps.lambda_build.outputs.image }}

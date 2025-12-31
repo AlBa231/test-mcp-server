@@ -25,22 +25,19 @@ resource "aws_lambda_function" "mcp_lambda" {
   package_type = "Image"
   image_uri    = var.lambda_image_uri
 
-  timeout      = 30
-  memory_size  = 1024
+  timeout     = 30
+  memory_size = 1024
 }
 
 resource "aws_lb_target_group" "lambda_tg" {
   name        = "lambda-target-group"
   target_type = "lambda"
-  vpc_id      = var.vpc_id
 
   health_check {
-    enabled             = true
-    matcher             = "200"
-    interval            = 35
-    timeout             = 30
-    healthy_threshold   = 5
-    unhealthy_threshold = 2
+    enabled = true
+    matcher = "200"
+    interval = 40
+    timeout  = 30
   }
 }
 
@@ -66,4 +63,9 @@ resource "aws_lb_listener_rule" "lambda_path_rule" {
       values = ["/lambda/*"]
     }
   }
+}
+
+resource "aws_lb_target_group_attachment" "lambda_attach" {
+  target_group_arn = aws_lb_target_group.lambda_tg.arn
+  target_id        = aws_lambda_function.mcp_lambda.arn
 }

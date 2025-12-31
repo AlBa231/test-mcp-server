@@ -15,6 +15,5 @@ variable "alb_http_listener_arn" {
 
 variable "lambda_image_uri" {
   type        = string
-  default     = "alba231/minimal-lambda-alb-go-echo:latest"
   description = "The ECR image URI for the Lambda function. By default, it points to a public image with echo response."
 }
