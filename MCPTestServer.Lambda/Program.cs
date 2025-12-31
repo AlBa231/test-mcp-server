@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
+    .AddAWSLambdaHosting(LambdaEventSource.ApplicationLoadBalancer)
     .AddHttpClient()
     .AddMcpServer()
     .WithHttpTransport()

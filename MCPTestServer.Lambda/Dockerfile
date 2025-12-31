@@ -20,4 +20,4 @@ FROM public.ecr.aws/lambda/dotnet:10
 
 WORKDIR /var/task
 COPY --from=build /app/publish .
-CMD ["Amazon.Lambda.AspNetCoreServer.Hosting::Amazon.Lambda.AspNetCoreServer.Hosting.LambdaEntryPoint::FunctionHandlerAsync"]
+CMD ["MCPTestServer.Lambda"]
