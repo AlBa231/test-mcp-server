@@ -66,7 +66,7 @@ resource "aws_iam_policy" "github_ci" {
         ]
         Resource = [
           "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}",
-          "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}*"
+          "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}-lambda"
         ]
       },
       {
