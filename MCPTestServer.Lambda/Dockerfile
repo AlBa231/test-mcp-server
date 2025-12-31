@@ -13,7 +13,8 @@ WORKDIR /src/MCPTestServer.Lambda
 
 RUN dotnet publish MCPTestServer.Lambda.csproj \
     -c $BUILD_CONFIGURATION \
-    -o /app/publish
+    -o /app/publish \
+    /p:PublishReadyToRun=false
 
 # ---------- final ----------
 FROM public.ecr.aws/lambda/dotnet:10
