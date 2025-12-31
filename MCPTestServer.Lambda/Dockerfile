@@ -18,6 +18,6 @@ RUN dotnet publish MCPTestServer.Lambda.csproj \
 # ---------- final ----------
 FROM public.ecr.aws/lambda/dotnet:10
 
-WORKDIR /app
+WORKDIR /var/task
 COPY --from=build /app/publish .
 CMD ["MCPTestServer.Lambda"]
