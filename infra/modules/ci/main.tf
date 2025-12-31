@@ -106,7 +106,7 @@ resource "aws_iam_policy" "github_ci" {
         ]
       },
       {
-        Sid = "AllowUpdateLambdaFunction"
+        Sid    = "AllowUpdateLambdaFunction"
         Effect = "Allow"
         Action = [
           "lambda:UpdateFunctionCode",

@@ -54,7 +54,6 @@ module "ci" {
 
 module "lambda" {
   source                = "./modules/lambda"
-  vpc_id                = module.vpc.vpc_id
   app_name              = var.app_name
   alb_http_listener_arn = module.alb.alb_http_listener_arn
   lambda_image_uri      = module.ecr.lambda_initial_image_uri

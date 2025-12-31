@@ -1,8 +1,3 @@
-variable "vpc_id" {
-  type        = string
-  description = "The VPC ID to deploy lambda function into"
-}
-
 variable "app_name" {
   type        = string
   description = "The name of app to use to construct resource names"
