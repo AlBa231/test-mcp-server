@@ -13,12 +13,11 @@ WORKDIR /src/MCPTestServer.Lambda
 
 RUN dotnet publish MCPTestServer.Lambda.csproj \
     -c $BUILD_CONFIGURATION \
-    -o /app/publish \
-    /p:PublishReadyToRun=false
+    -o /app/publish
 
 # ---------- final ----------
 FROM public.ecr.aws/lambda/dotnet:10
 
 WORKDIR /var/task
 COPY --from=build /app/publish .
-CMD ["MCPTestServer.Lambda::MCPTestServer.Lambda.LambdaEntryPoint::FunctionHandlerAsync"]
+CMD ["Amazon.Lambda.AspNetCoreServer.Hosting::Amazon.Lambda.AspNetCoreServer.Hosting.LambdaEntryPoint::FunctionHandlerAsync"]
