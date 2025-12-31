@@ -104,6 +104,15 @@ resource "aws_iam_policy" "github_ci" {
           "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}",
           "arn:aws:ecr:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:repository/${var.app_name}*"
         ]
+      },
+      {
+        Sid = "AllowUpdateLambdaFunction"
+        Effect = "Allow"
+        Action = [
+          "lambda:UpdateFunctionCode",
+          "lambda:GetFunction"
+        ]
+        Resource = "arn:aws:lambda:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:function/${var.app_name}*"
       }
     ]
   })
