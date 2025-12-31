@@ -112,7 +112,7 @@ resource "aws_iam_policy" "github_ci" {
           "lambda:UpdateFunctionCode",
           "lambda:GetFunction"
         ]
-        Resource = "arn:aws:lambda:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:function/${var.app_name}*"
+        Resource = "arn:aws:lambda:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:function:${var.app_name}*"
       }
     ]
   })
