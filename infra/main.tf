@@ -38,6 +38,7 @@ module "ecs" {
   target_group_arn = module.alb.target_group_arn
   region           = var.region
   app_name         = var.app_name
+  task_image_uri   = module.ecr.ecs_image_uri
 }
 
 module "cloudfront" {
@@ -56,5 +57,5 @@ module "lambda" {
   source                = "./modules/lambda"
   app_name              = var.app_name
   alb_http_listener_arn = module.alb.alb_http_listener_arn
-  lambda_image_uri      = module.ecr.lambda_initial_image_uri
+  lambda_image_uri      = module.ecr.lambda_image_uri
 }

@@ -1,32 +1,21 @@
-resource "aws_ecr_repository" "this" {
-  name = var.app_name
-
-  image_scanning_configuration {
-    scan_on_push = true
+terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.6.2"
+    }
   }
 
-  tags = {
-    Name = var.app_name
+  required_version = "~> 1.13"
+}
+
+data "aws_ecr_authorization_token" "this" {}
+
+provider "docker" {
+  registry_auth {
+    address  = data.aws_ecr_authorization_token.this.proxy_endpoint
+    username = data.aws_ecr_authorization_token.this.user_name
+    password = data.aws_ecr_authorization_token.this.password
   }
 }
 
-resource "aws_ecr_lifecycle_policy" "this" {
-  repository = aws_ecr_repository.this.name
-
-  policy = jsonencode({
-    rules = [
-      {
-        rulePriority = 1
-        description  = "Keep last 5 images"
-        selection = {
-          tagStatus   = "any"
-          countType   = "imageCountMoreThan"
-          countNumber = 5
-        }
-        action = {
-          type = "expire"
-        }
-      }
-    ]
-  })
-}

@@ -51,3 +51,18 @@ resource "aws_ecr_lifecycle_policy" "lambda_repo_policy" {
     ]
   })
 }
+
+resource "docker_image" "lambda_repo_image" {
+  name = "${aws_ecr_repository.lambda_repo.repository_url}:latest"
+
+  build {
+    context    = "${path.root}/../"
+    dockerfile = "MCPTestServer.Lambda/Dockerfile"
+  }
+
+  keep_locally = false
+}
+
+resource "docker_registry_image" "lambda_repo_image" {
+  name = docker_image.lambda_repo_image.name
+}
