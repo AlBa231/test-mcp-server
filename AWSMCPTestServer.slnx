@@ -6,8 +6,8 @@
   <Folder Name="/Solution Items/workflows/">
     <File Path=".github/workflows/build_deploy_ecs.yaml" />
   </Folder>
-  <Project Path="AWSMCPTestServer.Console/AWSMCPTestServer.Console.csproj" />
-  <Project Path="McpTestServer.Core/McpTestServer.Core.csproj" />
+  <Project Path="MCPTestServer.Console/MCPTestServer.Console.csproj" />
+  <Project Path="MCPTestServer.Core/MCPTestServer.Core.csproj" DisplayName="MCPTestServer.Core" />
   <Project Path="MCPTestServer.Lambda/MCPTestServer.Lambda.csproj" />
   <Project Path="MCPTestServer.WebApi/MCPTestServer.WebApi.csproj" />
 </Solution>
