@@ -50,5 +50,8 @@ npx @modelcontextprotocol/inspector https://d1w0taajz0mgpa.cloudfront.net/test/
 		1. Application Load Balancer (ALB)
 		1. CloudFront Distribution
 		1. Generates `infra/ci/task-definition.json` file for ECS service auto-deployment via GitHub Actions.
+
+
+#### For automatic deployment via GitHub Actions:
 1. Add new generated `infra/ci/task-definition.json` file to GitHub repository.
 1. Commit and push changes to GitHub repository to trigger GitHub Actions workflow for deploying the Docker container to ECS.

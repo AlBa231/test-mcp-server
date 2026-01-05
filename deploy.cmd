@@ -32,6 +32,13 @@ terraform init
 
 terraform apply
 
-cd ..
+cd keycloak-setup
+powershell wait_for_keycloak.ps1
+
+terraform init
+
+terraform apply
+
+cd ..\..
 
 pause
