@@ -18,3 +18,18 @@ variable "github_repo" {
   type        = string
   description = "The GitHub repository name"
 }
+
+variable "keycloak_admin_username" {
+  type        = string
+  description = "The Keycloak admin username"
+}
+
+variable "keycloak_admin_password" {
+  type        = string
+  description = "The Keycloak admin password"
+}
+
+variable "is_windows" {
+  type    = bool
+  default = true
+}

@@ -61,7 +61,10 @@ resource "aws_lb_listener_rule" "lambda_path_rule" {
 
   condition {
     path_pattern {
-      values = ["/lambda/*"]
+      values = [
+        "/lambda",
+        "/lambda/*"
+      ]
     }
   }
 }

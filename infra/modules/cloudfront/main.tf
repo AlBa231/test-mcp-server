@@ -11,6 +11,11 @@ resource "aws_cloudfront_distribution" "this" {
       origin_protocol_policy = "http-only"
       origin_ssl_protocols   = ["TLSv1.2"]
     }
+
+    custom_header {
+      name  = "X-Forwarded-Proto"
+      value = "https"
+    }
   }
 
   default_cache_behavior {
@@ -19,11 +24,8 @@ resource "aws_cloudfront_distribution" "this" {
     allowed_methods        = ["HEAD", "DELETE", "POST", "GET", "OPTIONS", "PUT", "PATCH"]
     cached_methods         = ["HEAD", "GET", "OPTIONS"]
 
-    forwarded_values {
-      query_string = true
-      cookies { forward = "all" }
-      headers = ["Accept"]
-    }
+    cache_policy_id          = data.aws_cloudfront_cache_policy.caching_disabled.id
+    origin_request_policy_id = data.aws_cloudfront_origin_request_policy.all_viewer.id
   }
 
   restrictions {
