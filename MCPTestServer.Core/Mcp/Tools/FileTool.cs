@@ -2,7 +2,7 @@
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 
-namespace McpTestServer.Core.Tools;
+namespace MCPTestServer.Core.Mcp.Tools;
 
 [McpServerToolType]
 public static class FileTool

@@ -1,18 +1,25 @@
-﻿using McpTestServer.Core.Extensions;
+﻿using MCPTestServer.Core;
+using McpTestServer.Core.Extensions;
 using MCPTestServer.WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
+McpConfiguration.Instance.IsAuthorizationEnabled = builder.Configuration.UseAuthorization();
+
+var mcpBuilder = builder.Services
     .AddHttpClient()
     .AddMcpServer()
+    .WithToolsFromAssembly()
     .WithHttpTransport()
     .AddMcpTestServerFeatures();
 
 builder.Services.AddHealthChecks();
 
-if (builder.Configuration.UseAuthorization())
+if (McpConfiguration.Instance.IsAuthorizationEnabled)
+{
+    mcpBuilder.AddAuthorizationFilters();
     builder.Services.AddMcpAuthorization(builder.Configuration);
+}
 
 var app = builder.Build();
 app.UsePathBase(builder.Configuration.GetAppBasePath());
@@ -22,7 +29,7 @@ app.UseMcpExceptionHandling();
 app.Logger.Log(LogLevel.Information, "Mapping health to /health");
 app.MapHealthChecks("/health");
 
-if (builder.Configuration.UseAuthorization())
+if (McpConfiguration.Instance.IsAuthorizationEnabled)
     app.UseMcpAuthorization().MapMcp(builder.Configuration.GetAppBasePath()).RequireAuthorization();
 else
     app.MapMcp(builder.Configuration.GetAppBasePath());

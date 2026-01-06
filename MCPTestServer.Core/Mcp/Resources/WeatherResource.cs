@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using ModelContextProtocol.Server;
 
-namespace McpTestServer.Core.Resources;
+namespace MCPTestServer.Core.Mcp.Resources;
 
 [McpServerResourceType]
 public class WeatherResource(HttpClient client)

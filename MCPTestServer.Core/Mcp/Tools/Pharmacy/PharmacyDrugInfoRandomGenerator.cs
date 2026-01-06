@@ -1,4 +1,6 @@
-namespace McpTestServer.Core.Tools.Pharmacy;
+using MCPTestServer.Core.Mcp.Tools.Pharmacy.Models;
+
+namespace MCPTestServer.Core.Mcp.Tools.Pharmacy;
 
 internal static class PharmacyDrugInfoRandomGenerator
 {

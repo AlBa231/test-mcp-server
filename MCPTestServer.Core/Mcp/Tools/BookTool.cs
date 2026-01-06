@@ -4,7 +4,7 @@ using System.ComponentModel;
 using McpTestServer.Core.Extensions;
 using Microsoft.Extensions.AI;
 
-namespace McpTestServer.Core.Tools;
+namespace MCPTestServer.Core.Mcp.Tools;
 
 [McpServerToolType]
 public static class BookTool

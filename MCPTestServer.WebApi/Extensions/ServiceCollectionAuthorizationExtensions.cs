@@ -11,7 +11,6 @@ public static class ServiceCollectionAuthorizationExtensions
         var authorizationServerUrl = configurationManager["AuthorizationServerUrl"] ?? throw new InvalidOperationException("AuthorizationServerUrl must be defined in appSettings.");
         var inspectorOrigins = configurationManager["InspectorOrigins"] ?? throw new InvalidOperationException("AuthorizationServerUrl must be defined in appSettings.");
 
-
         services
             .AddAuthentication(options =>
             {

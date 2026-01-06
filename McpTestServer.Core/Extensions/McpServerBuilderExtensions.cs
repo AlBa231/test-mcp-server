@@ -1,7 +1,7 @@
 ﻿using McpTestServer.Core.BackgroundServices;
-using McpTestServer.Core.Prompts;
-using McpTestServer.Core.Resources;
-using McpTestServer.Core.Tools;
+using MCPTestServer.Core.Mcp.Prompts;
+using MCPTestServer.Core.Mcp.Resources;
+using MCPTestServer.Core.Mcp.Tools.Currency;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace McpTestServer.Core.Extensions;
@@ -20,6 +20,7 @@ public static class McpServerBuilderExtensions
             .WithResources<WeatherResource>()
             .WithResources<UkraineHolidaysResource>()
             .WithPromptsFromAssembly(typeof(VacationPrompt).Assembly);
+
         return builder;
     }
 }

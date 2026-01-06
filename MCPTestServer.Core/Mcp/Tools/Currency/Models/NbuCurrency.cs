@@ -1,4 +1,4 @@
-﻿namespace McpTestServer.Core.Models;
+﻿namespace MCPTestServer.Core.Mcp.Tools.Currency.Models;
 
 public class NbuCurrency
 {

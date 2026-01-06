@@ -1,12 +1,12 @@
 using System.ComponentModel;
 using System.Net.Http.Json;
 using McpTestServer.Core.Extensions;
-using McpTestServer.Core.Models;
+using MCPTestServer.Core.Mcp.Tools.Currency.Models;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 
-namespace McpTestServer.Core.Tools;
+namespace MCPTestServer.Core.Mcp.Tools.Currency;
 
 public class CurrencyTool(HttpClient client, ILogger<CurrencyTool> logger)
 {

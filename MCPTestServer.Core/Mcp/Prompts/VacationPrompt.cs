@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using ModelContextProtocol.Server;
 
-namespace McpTestServer.Core.Prompts;
+namespace MCPTestServer.Core.Mcp.Prompts;
 
 [McpServerPromptType]
 public static class VacationPrompt

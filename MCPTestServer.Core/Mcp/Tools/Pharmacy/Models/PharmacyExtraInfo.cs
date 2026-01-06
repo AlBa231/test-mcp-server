@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace McpTestServer.Core.Tools.Pharmacy;
+namespace MCPTestServer.Core.Mcp.Tools.Pharmacy.Models;
 
 public class PharmacyExtraInfo
 {
