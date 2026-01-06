@@ -1,4 +1,5 @@
-﻿using MCPTestServer.Core.Extensions;
+﻿using MCPTestServer.Core;
+using MCPTestServer.Core.Extensions;
 
 namespace MCPTestServer.WebApi.Extensions;
 
@@ -36,7 +37,7 @@ public static class McpExceptionHandlingExtensions
                     error = new
                     {
                         code = "INTERNAL_ERROR",
-                        message = "An internal error occurred while executing the MCP request.",
+                        message = ex is McpUnauthorizedException ? ex.Message : "An internal error occurred while executing the MCP request.",
                         data = new
                         {
                             traceId
