@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
 
-namespace McpTestServer.Core.BackgroundServices;
+namespace MCPTestServer.Core.BackgroundServices;
 
 public class EchoResourceUpdateNotifier(IServiceProvider serviceProvider, ILogger<EchoResourceUpdateNotifier> logger) : BackgroundService
 {

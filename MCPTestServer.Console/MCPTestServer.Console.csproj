@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\McpTestServer.Core\MCPTestServer.Core.csproj" />
+    <ProjectReference Include="..\MCPTestServer.Core\MCPTestServer.Core.csproj" />
   </ItemGroup>
 
 </Project>

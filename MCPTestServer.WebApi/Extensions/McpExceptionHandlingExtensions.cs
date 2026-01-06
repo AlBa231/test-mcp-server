@@ -1,4 +1,4 @@
-﻿using McpTestServer.Core.Extensions;
+﻿using MCPTestServer.Core.Extensions;
 
 namespace MCPTestServer.WebApi.Extensions;
 

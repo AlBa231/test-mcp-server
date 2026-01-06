@@ -1,7 +1,7 @@
 ﻿using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
-using McpTestServer.Core.Extensions;
+using MCPTestServer.Core.Extensions;
 using Microsoft.Extensions.AI;
 
 namespace MCPTestServer.Core.Mcp.Tools;

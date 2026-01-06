@@ -4,7 +4,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY MCPTestServer.Lambda/MCPTestServer.Lambda.csproj MCPTestServer.Lambda/
-COPY McpTestServer.Core/McpTestServer.Core.csproj McpTestServer.Core/
+COPY MCPTestServer.Core/MCPTestServer.Core.csproj MCPTestServer.Core/
 
 RUN dotnet restore MCPTestServer.Lambda/MCPTestServer.Lambda.csproj
 

@@ -1,10 +1,10 @@
-﻿using McpTestServer.Core.BackgroundServices;
+﻿using MCPTestServer.Core.BackgroundServices;
 using MCPTestServer.Core.Mcp.Prompts;
 using MCPTestServer.Core.Mcp.Resources;
 using MCPTestServer.Core.Mcp.Tools.Currency;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace McpTestServer.Core.Extensions;
+namespace MCPTestServer.Core.Extensions;
 
 public static class McpServerBuilderExtensions
 {

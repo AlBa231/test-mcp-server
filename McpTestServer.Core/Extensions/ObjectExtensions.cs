@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace McpTestServer.Core.Extensions;
+namespace MCPTestServer.Core.Extensions;
 
 public static class ObjectExtensions
 {

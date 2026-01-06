@@ -1,5 +1,5 @@
 ﻿using MCPTestServer.Core;
-using McpTestServer.Core.Extensions;
+using MCPTestServer.Core.Extensions;
 using MCPTestServer.WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

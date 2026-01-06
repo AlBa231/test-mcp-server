@@ -1,4 +1,4 @@
-﻿using McpTestServer.Core.Extensions;
+﻿using MCPTestServer.Core.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;

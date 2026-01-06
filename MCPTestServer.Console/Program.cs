@@ -1,4 +1,4 @@
-﻿using McpTestServer.Core.Extensions;
+﻿using MCPTestServer.Core.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

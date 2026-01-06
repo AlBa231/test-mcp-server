@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using McpTestServer.Core.Extensions;
+using MCPTestServer.Core.Extensions;
 using MCPTestServer.Core.Extensions;
 using MCPTestServer.Core.Mcp.Tools.Pharmacy.Models;
 using MCPTestServer.Core.Services;

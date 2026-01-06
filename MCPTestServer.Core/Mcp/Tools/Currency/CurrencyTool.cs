@@ -1,6 +1,6 @@
 using System.ComponentModel;
 using System.Net.Http.Json;
-using McpTestServer.Core.Extensions;
+using MCPTestServer.Core.Extensions;
 using MCPTestServer.Core.Mcp.Tools.Currency.Models;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Protocol;

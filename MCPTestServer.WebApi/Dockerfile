@@ -9,7 +9,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY MCPTestServer.WebApi/MCPTestServer.WebApi.csproj MCPTestServer.WebApi/
-COPY McpTestServer.Core/McpTestServer.Core.csproj McpTestServer.Core/
+COPY MCPTestServer.Core/MCPTestServer.Core.csproj MCPTestServer.Core/
 
 RUN dotnet restore MCPTestServer.WebApi/MCPTestServer.WebApi.csproj
 

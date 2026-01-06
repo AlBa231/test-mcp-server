@@ -19,6 +19,6 @@
     <PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.5.0-preview.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\McpTestServer.Core\McpTestServer.Core.csproj" />
+    <ProjectReference Include="..\MCPTestServer.Core\MCPTestServer.Core.csproj" />
   </ItemGroup>
 </Project>
