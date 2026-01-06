@@ -37,3 +37,8 @@ variable "cloudfront_domain" {
   type        = string
   description = "The CloudFront domain name to be used by the ECS tasks"
 }
+
+variable "enable_authorization" {
+  type        = bool
+  description = "Whether to enable authorization"
+}

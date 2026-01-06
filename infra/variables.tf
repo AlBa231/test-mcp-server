@@ -29,7 +29,6 @@ variable "keycloak_admin_password" {
   description = "The Keycloak admin password"
 }
 
-variable "is_windows" {
-  type    = bool
-  default = true
+variable "enable_authorization" {
+  type = bool
 }

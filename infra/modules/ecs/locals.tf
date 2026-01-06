@@ -14,6 +14,10 @@ locals {
       }
       environment = [
         {
+          name  = "EnableAuthorization"
+          value = var.enable_authorization ? "true" : "false"
+        },
+        {
           name  = "ServerUrl"
           value = "https://${var.cloudfront_domain}"
         },

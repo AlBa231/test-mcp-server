@@ -36,15 +36,16 @@ module "alb" {
 }
 
 module "ecs" {
-  source            = "./modules/ecs"
-  vpc_id            = module.vpc.vpc_id
-  private_subnets   = module.vpc.private_subnets
-  alb_sg_id         = module.alb.alb_sg_id
-  target_group_arn  = module.alb.target_group_arn
-  region            = var.region
-  app_name          = var.app_name
-  task_image_uri    = module.ecr.ecs_image_uri
-  cloudfront_domain = module.cloudfront.cloudfront_domain_name
+  source               = "./modules/ecs"
+  vpc_id               = module.vpc.vpc_id
+  private_subnets      = module.vpc.private_subnets
+  alb_sg_id            = module.alb.alb_sg_id
+  target_group_arn     = module.alb.target_group_arn
+  region               = var.region
+  app_name             = var.app_name
+  task_image_uri       = module.ecr.ecs_image_uri
+  cloudfront_domain    = module.cloudfront.cloudfront_domain_name
+  enable_authorization = var.enable_authorization
 }
 
 module "cloudfront" {
