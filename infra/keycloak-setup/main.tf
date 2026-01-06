@@ -50,3 +50,27 @@ resource "keycloak_openid_client_default_scopes" "mcp_tools_default_scopes" {
     keycloak_openid_client_scope.mcp_tools.name
   ]
 }
+
+resource "keycloak_openid_user_realm_role_protocol_mapper" "realm_role_mapper" {
+  realm_id  = keycloak_realm.mcp.id
+  client_id = keycloak_openid_client.mcp.id
+  name      = "realm-role-mapper"
+
+  claim_name          = "roles"
+  multivalued         = true
+  add_to_id_token     = true
+  add_to_access_token = true
+  add_to_userinfo     = true
+}
+
+resource "keycloak_openid_user_client_role_protocol_mapper" "client_role_mapper" {
+  realm_id  = keycloak_realm.mcp.id
+  client_id = keycloak_openid_client.mcp.id
+  name      = "client-role-mapper"
+
+  client_id_for_role_mappings = "mcp"
+  claim_name                  = "roles"
+  multivalued                 = true
+  add_to_id_token             = true
+  add_to_access_token         = true
+}
