@@ -36,14 +36,15 @@ module "alb" {
 }
 
 module "ecs" {
-  source           = "./modules/ecs"
-  vpc_id           = module.vpc.vpc_id
-  private_subnets  = module.vpc.private_subnets
-  alb_sg_id        = module.alb.alb_sg_id
-  target_group_arn = module.alb.target_group_arn
-  region           = var.region
-  app_name         = var.app_name
-  task_image_uri   = module.ecr.ecs_image_uri
+  source            = "./modules/ecs"
+  vpc_id            = module.vpc.vpc_id
+  private_subnets   = module.vpc.private_subnets
+  alb_sg_id         = module.alb.alb_sg_id
+  target_group_arn  = module.alb.target_group_arn
+  region            = var.region
+  app_name          = var.app_name
+  task_image_uri    = module.ecr.ecs_image_uri
+  cloudfront_domain = module.cloudfront.cloudfront_domain_name
 }
 
 module "cloudfront" {
@@ -78,8 +79,8 @@ module "keycloak" {
 }
 
 resource "local_file" "keycloak_config" {
-  filename   = "${path.root}/keycloak-setup/terraform.tfvars"
-  content    = <<EOT
+  filename = "${path.root}/keycloak-setup/terraform.tfvars"
+  content  = <<EOT
     cloudfront_domain = "${module.cloudfront.cloudfront_domain_name}"
     keycloak_admin_username = "${var.keycloak_admin_username}"
     keycloak_admin_password = "${var.keycloak_admin_password}"
@@ -87,8 +88,8 @@ resource "local_file" "keycloak_config" {
 }
 
 resource "local_file" "wait_for_keycloak" {
-  filename   = "${path.root}/keycloak-setup/wait_for_keycloak.ps1"
-  content    = <<EOT
+  filename = "${path.root}/keycloak-setup/wait_for_keycloak.ps1"
+  content  = <<EOT
         $maxTries = 30
         $delay = 5
         for ($i=0; $i -lt $maxTries; $i++) {

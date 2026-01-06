@@ -12,6 +12,16 @@ locals {
           "awslogs-stream-prefix" = "ecs"
         }
       }
+      environment = [
+        {
+          name  = "ServerUrl"
+          value = "https://${var.cloudfront_domain}"
+        },
+        {
+          name  = "AuthorizationServerUrl"
+          value = "https://${var.cloudfront_domain}/auth/realms/mcp"
+        }
+      ]
     }
   ]
 }

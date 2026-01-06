@@ -32,3 +32,8 @@ variable "app_name" {
 variable "region" {
   type = string
 }
+
+variable "cloudfront_domain" {
+  type        = string
+  description = "The CloudFront domain name to be used by the ECS tasks"
+}
