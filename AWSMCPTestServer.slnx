@@ -5,9 +5,10 @@
   </Folder>
   <Folder Name="/Solution Items/workflows/">
     <File Path=".github/workflows/build_deploy_ecs.yaml" />
+    <File Path=".github/workflows/create_release.yaml" />
   </Folder>
   <Project Path="MCPTestServer.Console/MCPTestServer.Console.csproj" />
-  <Project Path="MCPTestServer.Core/MCPTestServer.Core.csproj" DisplayName="MCPTestServer.Core" />
+  <Project Path="MCPTestServer.Core/MCPTestServer.Core.csproj" />
   <Project Path="MCPTestServer.Lambda/MCPTestServer.Lambda.csproj" />
   <Project Path="MCPTestServer.WebApi/MCPTestServer.WebApi.csproj" />
 </Solution>
