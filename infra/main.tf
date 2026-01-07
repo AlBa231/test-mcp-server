@@ -49,8 +49,9 @@ module "ecs" {
 }
 
 module "cloudfront" {
-  source       = "./modules/cloudfront"
-  alb_dns_name = module.alb.alb_dns_name
+  source        = "./modules/cloudfront"
+  alb_dns_name  = module.alb.alb_dns_name
+  vpc_origin_id = module.alb.vpc_origin_id
 }
 
 module "ci" {
@@ -77,31 +78,4 @@ module "keycloak" {
   private_subnet_id       = element(module.vpc.private_subnets, 0)
   keycloak_admin_username = var.keycloak_admin_username
   keycloak_admin_password = var.keycloak_admin_password
-}
-
-resource "local_file" "keycloak_config" {
-  filename = "${path.root}/keycloak-setup/terraform.tfvars"
-  content  = <<EOT
-    cloudfront_domain = "${module.cloudfront.cloudfront_domain_name}"
-    keycloak_admin_username = "${var.keycloak_admin_username}"
-    keycloak_admin_password = "${var.keycloak_admin_password}"
-  EOT
-}
-
-resource "local_file" "wait_for_keycloak" {
-  filename = "${path.root}/keycloak-setup/wait_for_keycloak.ps1"
-  content  = <<EOT
-        $maxTries = 30
-        $delay = 5
-        for ($i=0; $i -lt $maxTries; $i++) {
-          try {
-            $response = Invoke-WebRequest -Uri https://${module.cloudfront.cloudfront_domain_name}/auth/realms/master -UseBasicParsing -ErrorAction Stop
-            Write-Host "Checking the URL.... Status - HTTP status code: $($response.StatusCode)"
-            if ($response.StatusCode -eq 200) { exit 0 }
-          } catch {
-            Write-Host "Error. $($_.Exception.Message). Retrying..."
-            Start-Sleep -Seconds $delay
-          }
-        }    
-  EOT
 }

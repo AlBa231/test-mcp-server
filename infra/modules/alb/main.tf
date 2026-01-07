@@ -3,9 +3,9 @@ resource "aws_security_group" "alb_allow_cloudfront" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
     prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront_ipv4.id]
   }
 
@@ -22,15 +22,16 @@ resource "aws_security_group" "alb_allow_cloudfront_ipv6" {
   vpc_id = var.vpc_id
 
   ingress {
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    prefix_list_ids = [ data.aws_ec2_managed_prefix_list.cloudfront_ipv6.id ]
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront_ipv6.id]
   }
 }
 
 resource "aws_lb" "this" {
   name               = "ecs-alb"
+  internal           = true
   load_balancer_type = "application"
   subnets            = var.subnets
   security_groups    = [aws_security_group.alb_allow_cloudfront.id, aws_security_group.alb_allow_cloudfront_ipv6.id]

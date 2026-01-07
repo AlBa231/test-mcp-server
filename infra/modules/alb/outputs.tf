@@ -12,8 +12,10 @@ output "target_group_arn" {
   value = aws_lb_target_group.ecs.arn
 }
 
-
-
 output "alb_http_listener_arn" {
   value = aws_lb_listener.http.arn
+}
+
+output "vpc_origin_id" {
+  value = aws_cloudfront_vpc_origin.alb_origin.id
 }
