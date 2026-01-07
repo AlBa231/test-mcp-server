@@ -3,8 +3,8 @@ output "alb_dns_name" {
 }
 
 
-output "alb_sg_id" {
-  value = aws_security_group.alb.id
+output "alb_sg_ids" {
+  value = [aws_security_group.alb_allow_cloudfront.id, aws_security_group.alb_allow_cloudfront_ipv6.id]
 }
 
 

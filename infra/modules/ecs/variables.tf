@@ -8,8 +8,8 @@ variable "private_subnets" {
 }
 
 
-variable "alb_sg_id" {
-  type = string
+variable "alb_sg_ids" {
+  type = list(string)
 }
 
 

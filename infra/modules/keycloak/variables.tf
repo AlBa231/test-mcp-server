@@ -14,9 +14,9 @@ variable "vpc_id" {
   description = "The VPC ID where the Keycloak instance will be deployed."
 }
 
-variable "alb_security_group_id" {
-  type        = string
-  description = "The security group ID associated with the ALB."
+variable "alb_security_group_ids" {
+  type        = list(string)
+  description = "The security group IDs associated with the ALB."
 }
 
 variable "private_subnet_id" {

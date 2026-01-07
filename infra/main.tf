@@ -39,7 +39,7 @@ module "ecs" {
   source               = "./modules/ecs"
   vpc_id               = module.vpc.vpc_id
   private_subnets      = module.vpc.private_subnets
-  alb_sg_id            = module.alb.alb_sg_id
+  alb_sg_ids           = module.alb.alb_sg_ids
   target_group_arn     = module.alb.target_group_arn
   region               = var.region
   app_name             = var.app_name
@@ -71,7 +71,7 @@ module "keycloak" {
   source = "./modules/keycloak"
 
   cloudfront_domain       = module.cloudfront.cloudfront_domain_name
-  alb_security_group_id   = module.alb.alb_sg_id
+  alb_security_group_ids  = module.alb.alb_sg_ids
   alb_http_listener_arn   = module.alb.alb_http_listener_arn
   vpc_id                  = module.vpc.vpc_id
   private_subnet_id       = element(module.vpc.private_subnets, 0)

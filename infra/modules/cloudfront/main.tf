@@ -1,6 +1,8 @@
 resource "aws_cloudfront_distribution" "this" {
   enabled = true
 
+  web_acl_id = aws_wafv2_web_acl.cloudfront.arn
+
   origin {
     domain_name = var.alb_dns_name
     origin_id   = "alb"
