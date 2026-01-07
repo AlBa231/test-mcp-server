@@ -56,7 +56,14 @@ jobs:
 
       - name: Prepare artifact files
         run: |
-          OUTDIR="bin/Release/${{ env.TARGET_FRAMEWORK }}/${{ matrix.rid }}/publish"
+          set -euo pipefail
+          PROJDIR="$(dirname "$PROJECT_PATH")"
+          OUTDIR="$PROJDIR/bin/Release/${{ env.TARGET_FRAMEWORK }}/${{ matrix.rid }}/publish"
+
+          echo "Project dir: $PROJDIR"
+          echo "Publish out dir: $OUTDIR"
+          ls -la "$OUTDIR"
+          
           mkdir -p "dist/${{ matrix.rid }}"
           if [[ "${{ matrix.rid }}" == "win-x64" ]]; then
             cp "$OUTDIR/${{ env.APP_NAME }}.exe" "dist/${{ matrix.rid }}/${{ env.APP_NAME }}-${{ matrix.rid }}.exe"
