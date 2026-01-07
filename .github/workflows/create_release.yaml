@@ -19,7 +19,7 @@ permissions:
 env:
   PROJECT_PATH: MCPTestServer.Console/MCPTestServer.Console.csproj
   TARGET_FRAMEWORK: net10.0
-  APP_NAME: McpTestServer
+  APP_NAME: MCPTestServer.Console
 
 jobs:
   build:
