@@ -2,13 +2,10 @@
 
 public static class ConfigurationManagerExtensions
 {
-    public static bool UseAuthorization(this IConfigurationManager configurationManager)
+    extension(IConfigurationManager configurationManager)
     {
-        return bool.TryParse(configurationManager["EnableAuthorization"], out bool enableAuthorization) && enableAuthorization;
-    }
+        public bool UseAuthorization => bool.TryParse(configurationManager["EnableAuthorization"], out bool enableAuthorization) && enableAuthorization;
 
-    public static string GetAppBasePath(this ConfigurationManager configurationManager)
-    {
-        return configurationManager["BasePath"] ?? "/";
+        public string AppBasePath => configurationManager["BasePath"] ?? "/";
     }
 }

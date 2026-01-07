@@ -4,8 +4,8 @@ namespace MCPTestServer.Core.Extensions;
 
 public static class ObjectExtensions
 {
-    public static string ToJson(this object obj)
+    extension(object obj)
     {
-        return JsonSerializer.Serialize(obj);
+        public string ToJson() => JsonSerializer.Serialize(obj);
     }
 }

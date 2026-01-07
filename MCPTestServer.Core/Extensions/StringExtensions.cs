@@ -6,8 +6,8 @@ public static class StringExtensions
 {
     private static readonly JsonSerializerOptions JsonSerializerOptions = new() { AllowTrailingCommas = true, PropertyNameCaseInsensitive = true };
 
-    public static T? FromJson<T>(this string json)
+    extension(string json)
     {
-        return JsonSerializer.Deserialize<T>(json, JsonSerializerOptions);
+        public T? FromJson<T>() => JsonSerializer.Deserialize<T>(json, JsonSerializerOptions);
     }
 }
