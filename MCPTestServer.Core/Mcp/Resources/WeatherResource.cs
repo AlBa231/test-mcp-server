@@ -7,7 +7,7 @@ namespace MCPTestServer.Core.Mcp.Resources;
 public class WeatherResource(HttpClient client)
 {
     private static readonly Dictionary<string, string> WeatherByCityUrls =
-        new (StringComparer.OrdinalIgnoreCase)
+        new(StringComparer.OrdinalIgnoreCase)
         {
             { "Kiev", "https://www.yr.no/en/content/2-703448/meteogram.svg" },
             { "Kharkiv", "https://www.yr.no/en/content/2-706483/meteogram.svg" }

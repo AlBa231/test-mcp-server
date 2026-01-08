@@ -14,7 +14,7 @@ public class EchoResourceUpdateNotifier(IServiceProvider serviceProvider, ILogge
         //var mcpServer = serviceProvider.GetRequiredService<IMcpServerPrimitive>();
         //while (!stoppingToken.IsCancellationRequested)
         //{
-            await Task.Delay(NotifyDelay, stoppingToken);
+        await Task.Delay(NotifyDelay, stoppingToken);
         //    logger?.LogInformation("Send resource update notification");
         //    await mcpServer.SendNotificationAsync("hello://echo/best", stoppingToken);
         //}

@@ -6,7 +6,7 @@ public static class WebApplicationExtensions
     {
         return app.Use(async (context, next) =>
         {
-            if (!context.Request.Path.Value?.Contains("/health", StringComparison.OrdinalIgnoreCase) ?? false) 
+            if (!context.Request.Path.Value?.Contains("/health", StringComparison.OrdinalIgnoreCase) ?? false)
                 await LogCurrentRequest(context);
 
             await next();
