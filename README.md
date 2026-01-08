@@ -39,24 +39,10 @@ dotnet build
 dotnet run --project ./MCPTestServer.Console
 ```
 
-If your workspace contains `AWSMCPTestServer.Console`, use `./AWSMCPTestServer.Console` instead.
-
 Run the Web API locally:
 
 ```bash
 dotnet run --project ./MCPTestServer.WebApi
-```
-
-Run the Lambda host locally:
-
-```bash
-dotnet run --project ./MCPTestServer.Lambda
-```
-
-Run unit tests:
-
-```bash
-dotnet test
 ```
 
 Format code:
@@ -79,8 +65,6 @@ Console (STDIO) example(s):
 
 ```bash
 npx @modelcontextprotocol/inspector dotnet run --project ./MCPTestServer.Console --no-build
-# or
-npx @modelcontextprotocol/inspector dotnet run --project ./AWSMCPTestServer.Console --no-build
 ```
 
 HTTPS (hosted on AWS):
@@ -148,7 +132,7 @@ Files to consult:
 ## Troubleshooting & notes
 
 - If Terraform fails to provision a resource, inspect the Terraform state in the S3 bucket created by `./deploy.cmd`.
-- Use application logs from `MCPTestServer.WebApi` and ECS task logs to investigate runtime issues.
+- Use application logs stored in CloudWatch from `MCPTestServer.WebApi` and ECS task logs to investigate runtime issues.
 - Ensure deployment runtimes match `.NET 10`.
 - For permission errors during deploy, confirm the AWS credentials and IAM policies used by the CLI have required permissions.
 
