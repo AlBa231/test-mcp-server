@@ -9,7 +9,6 @@ McpConfiguration.Instance.IsAuthorizationEnabled = builder.Configuration.UseAuth
 var mcpBuilder = builder.Services
     .AddHttpClient()
     .AddMcpServer()
-    .WithToolsFromAssembly()
     .WithHttpTransport()
     .AddMcpTestServerFeatures();
 
@@ -17,16 +16,16 @@ builder.Services.AddHealthChecks();
 
 if (McpConfiguration.Instance.IsAuthorizationEnabled)
 {
-    mcpBuilder.AddAuthorizationFilters();
+    mcpBuilder.WithToolsFromAssembly()
+              .AddAuthorizationFilters();
     builder.Services.AddMcpAuthorization(builder.Configuration);
 }
 
 var app = builder.Build();
-app.UsePathBase(builder.Configuration.AppBasePath);
-app.UseRequestLogging();
-app.UseMcpExceptionHandling();
+app.UsePathBase(builder.Configuration.AppBasePath)
+    .UseRequestLogging()
+    .UseMcpExceptionHandling();
 
-app.Logger.Log(LogLevel.Information, "Mapping health to /health");
 app.MapHealthChecks("/health");
 
 if (McpConfiguration.Instance.IsAuthorizationEnabled)
