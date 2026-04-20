@@ -27,8 +27,8 @@ public static class ServiceCollectionAuthorizationExtensions
             {
                 options.ResourceMetadata = new()
                 {
-                    Resource = new Uri(serverUrl),
-                    AuthorizationServers = { new Uri(authorizationServerUrl) },
+                    Resource = serverUrl,
+                    AuthorizationServers = { authorizationServerUrl },
                     ScopesSupported = ["mcp:tools"]
                 };
             });
