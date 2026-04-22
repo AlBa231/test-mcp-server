@@ -50,6 +50,7 @@ resource "aws_lambda_permission" "allow_alb" {
   source_arn    = aws_lb_target_group.lambda_tg.arn
 }
 
+
 resource "aws_lb_listener_rule" "lambda_path_rule" {
   listener_arn = var.alb_http_listener_arn
   priority     = 100
@@ -69,7 +70,12 @@ resource "aws_lb_listener_rule" "lambda_path_rule" {
   }
 }
 
+
 resource "aws_lb_target_group_attachment" "lambda_attach" {
   target_group_arn = aws_lb_target_group.lambda_tg.arn
   target_id        = aws_lambda_function.mcp_lambda.arn
+
+  depends_on = [
+    aws_lambda_permission.allow_alb
+  ]
 }

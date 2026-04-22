@@ -26,18 +26,29 @@ IF %ERRORLEVEL% NEQ 0 (
 
 aws s3api head-bucket --bucket "test-mcp-server-tfstate" 2>nul || aws s3 mb s3://test-mcp-server-tfstate
 
+@echo For terraform apply command, you will be prompted to enter "yes" to confirm the changes. Please review the changes before confirming.
+@echo It is intentional to have this confirmation step to prevent accidental changes to your infrastructure.
+
+docker desktop start
+
 cd infra
 
 terraform init
 
 terraform apply
 
+if %ERRORLEVEL% NEQ 0 (
+    echo Terraform apply failed. Please check the error messages above and resolve any issues before proceeding.
+    pause
+    exit /b %ERRORLEVEL%
+)
+
 cd keycloak-setup
-powershell wait_for_keycloak.ps1
+powershell ./wait_for_keycloak.ps1
 
 terraform init
 
-terraform apply
+terraform apply -auto-approve
 
 cd ..\..
 
